@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="18dp"
+    android:layout_marginBottom="14dp"
+    android:background="#DFF4FF"
+    android:elevation="3dp">
+
+    <TextView
+        android:id="@+id/tvItemTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Título"
+        android:textStyle="bold"
+        android:textSize="21sp"
+        android:textColor="#1F2A44"/>
+
+    <TextView
+        android:id="@+id/tvItemDescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descripción"
+        android:textSize="16sp"
+        android:textColor="#425466"
+        android:layout_marginTop="6dp"/>
+
+    <TextView
+        android:id="@+id/tvItemEstado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pendiente"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor="#2E7D32"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>
