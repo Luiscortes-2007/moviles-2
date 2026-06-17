@@ -7,6 +7,13 @@ appcompat = "1.6.1"
 material = "1.10.0"
 activityKtx = "1.8.0"
 constraintlayout = "2.1.4"
+appcompatV7 = "28.0.0"
+design = "28.0.0"
+supportAnnotations = "28.0.0"
+constraintLayoutVersion = "2.0.4"
+livedata = "1.1.1"
+viewmodel = "1.1.1"
+kotlin = "2.2.20"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -16,7 +23,14 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+appcompat-v7 = { group = "com.android.support", name = "appcompat-v7", version.ref = "appcompatV7" }
+design = { group = "com.android.support", name = "design", version.ref = "design" }
+support-annotations = { group = "com.android.support", name = "support-annotations", version.ref = "supportAnnotations" }
+constraint-layout = { group = "com.android.support.constraint", name = "constraint-layout", version.ref = "constraintLayoutVersion" }
+livedata = { group = "android.arch.lifecycle", name = "livedata", version.ref = "livedata" }
+viewmodel = { group = "android.arch.lifecycle", name = "viewmodel", version.ref = "viewmodel" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 

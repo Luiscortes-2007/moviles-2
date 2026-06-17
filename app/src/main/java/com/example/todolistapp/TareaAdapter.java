@@ -40,12 +40,18 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaViewHol
         );
 
         holder.tvDescripcion.setText(
-                tareaActual.getDescripcion()
+                tareaActual.getDescripcion() + " (Cant: " + tareaActual.getCantidad() + ")"
         );
 
-        holder.tvEstado.setText(
-                tareaActual.getEstado()
-        );
+        String estado = tareaActual.getEstado();
+        holder.tvEstado.setText(estado);
+
+        // Cambiar color según disponibilidad
+        if (estado.equals("Disponible")) {
+            holder.tvEstado.setTextColor(android.graphics.Color.parseColor("#03DAC6")); // Turquesa/Verde
+        } else {
+            holder.tvEstado.setTextColor(android.graphics.Color.parseColor("#FF5252")); // Rojo
+        }
 
     }
 

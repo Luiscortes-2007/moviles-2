@@ -19,25 +19,22 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        // Agregamos la columna 'cantidad' aquí
         String query =
                 "CREATE TABLE tareas (" +
                         "id INTEGER PRIMARY KEY," +
                         "titulo TEXT," +
                         "descripcion TEXT," +
+                        "cantidad INTEGER," +
                         "estado TEXT)";
 
         db.execSQL(query);
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        // Al incrementar la versión en el MainActivity, esto borrará la tabla vieja y creará la nueva con el campo cantidad
         db.execSQL("DROP TABLE IF EXISTS tareas");
-
         onCreate(db);
-
     }
-
 }
