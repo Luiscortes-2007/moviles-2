@@ -1,40 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="18dp"
-    android:layout_marginBottom="14dp"
-    android:background="@color/dark_surface"
-    android:elevation="4dp">
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/surface_white">
 
-    <TextView
-        android:id="@+id/tvItemTitulo"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Título"
-        android:textStyle="bold"
-        android:textSize="21sp"
-        android:textColor="@color/soft_purple"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvItemDescripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Descripción"
-        android:textSize="16sp"
-        android:textColor="#B0B0B0"
-        android:layout_marginTop="6dp"/>
+        <TextView
+            android:id="@+id/tvItemTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Producto"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/primary_soft"/>
 
-    <TextView
-        android:id="@+id/tvItemEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pendiente"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:textColor="@color/dark_secondary"
-        android:layout_marginTop="8dp"/>
+        <TextView
+            android:id="@+id/tvItemDescripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción y cantidad"
+            android:textSize="14sp"
+            android:textColor="@color/text_main"
+            android:layout_marginTop="4dp"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvItemEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estado"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

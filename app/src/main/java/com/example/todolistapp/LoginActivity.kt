@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            irAlMainActivity()
+                            verificarAccesoYEntrar()
                         } else {
                             Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
                         }
@@ -42,23 +42,10 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Botón Registrarse
+        // Botón Registrarse - Redirige a la ventana de registro
         binding.btnRegister.setOnClickListener {
-            val email = binding.etEmail.text.toString().trim()
-            val password = binding.etPassword.text.toString().trim()
-
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            guardarUsuarioEnFirestore(email)
-                        } else {
-                            Toast.makeText(this, "El usuario ya existe o error al registrar", Toast.LENGTH_LONG).show()
-                        }
-                    }
-            } else {
-                Toast.makeText(this, "Completa los campos para registrarte", Toast.LENGTH_SHORT).show()
-            }
+            val intent = Intent(this, CrearUsuarioActivity::class.java)
+            startActivity(intent)
         }
 
         // Botón Recuperar Contraseña
@@ -78,30 +65,31 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun guardarUsuarioEnFirestore(email: String) {
-        val uid = auth.currentUser?.uid ?: return
-        val usuarioMap = hashMapOf(
-            "uid" to uid,
-            "email" to email,
-            "fechaRegistro" to com.google.firebase.Timestamp.now()
-        )
-
-        firestore.collection("usuarios").document(uid).set(usuarioMap)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
-                irAlMainActivity()
-            }
-    }
-
     override fun onStart() {
         super.onStart()
         if (auth.currentUser != null) {
-            irAlMainActivity()
+            verificarAccesoYEntrar()
         }
     }
 
-    private fun irAlMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+    private fun verificarAccesoYEntrar() {
+        val uid = auth.currentUser?.uid ?: return
+        firestore.collection("users").document(uid).get()
+            .addOnSuccessListener { document ->
+                val status = document.getString("status")
+                if (document.exists() && status != "deshabilitado") {
+                    // El usuario está habilitado
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                } else {
+                    // El usuario fue deshabilitado
+                    auth.signOut()
+                    Toast.makeText(this, "Usuario deshabilitado. Comunícate con el administrador.", Toast.LENGTH_LONG).show()
+                }
+            }
+            .addOnFailureListener {
+                auth.signOut()
+                Toast.makeText(this, "Error de conexión al verificar cuenta", Toast.LENGTH_SHORT).show()
+            }
     }
 }

@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,7 @@ public class ListaTareasActivity extends AppCompatActivity {
     private RecyclerView rvTareas;
     private TareaAdapter adaptador;
     private List<Tarea> listaTareas;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +31,33 @@ public class ListaTareasActivity extends AppCompatActivity {
         rvTareas = findViewById(R.id.rvListaTareas);
         rvTareas.setLayoutManager(new LinearLayoutManager(this));
 
-        // Cargar los datos desde SQLite
-        cargarTareas();
+        // Consultar el rol del usuario antes de cargar la lista
+        verificarRolYcargarTareas();
     }
 
-    private void cargarTareas() {
+    private void verificarRolYcargarTareas() {
+        String uid = FirebaseAuth.getInstance().getCurrentUser() != null ?
+                FirebaseAuth.getInstance().getCurrentUser().getUid() : null;
+
+        if (uid != null) {
+            db.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
+                String role = "usuario_normal";
+                if (documentSnapshot.exists() && documentSnapshot.getString("role") != null) {
+                    role = documentSnapshot.getString("role");
+                }
+
+                // Cargamos las tareas de SQLite pasando el rol obtenido
+                cargarTareas(role);
+            }).addOnFailureListener(e -> {
+                // Si falla la red, por seguridad asumimos rol de usuario normal
+                cargarTareas("usuario_normal");
+            });
+        } else {
+            cargarTareas("usuario_normal");
+        }
+    }
+
+    private void cargarTareas(String userRole) {
         listaTareas = new ArrayList<>();
 
         try {
@@ -76,7 +102,7 @@ public class ListaTareasActivity extends AppCompatActivity {
             Toast.makeText(this, "Error al cargar tareas de SQLite: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-        // Configurar el adaptador con la lista (vacía o llena)
+        // Configurar el adaptador con la lista cargada
         adaptador = new TareaAdapter(listaTareas);
         rvTareas.setAdapter(adaptador);
     }

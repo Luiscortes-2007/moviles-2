@@ -24,18 +24,18 @@
             android:padding="24dp">
 
             <TextView
-                android:id="@+id/tvTitle"
+                android:id="@+id/tvTituloCrear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="¡Bienvenido!"
+                android:text="Crear Nuevo Usuario"
                 android:textAlignment="center"
-                android:textColor="@color/primary_soft"
-                android:textSize="28sp"
+                android:textColor="@color/text_main"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="32dp" />
+                android:layout_marginBottom="24dp" />
 
             <EditText
-                android:id="@+id/etEmail"
+                android:id="@+id/etNuevoEmail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Correo electrónico"
@@ -47,7 +47,7 @@
                 android:layout_marginBottom="16dp" />
 
             <EditText
-                android:id="@+id/etPassword"
+                android:id="@+id/etNuevoPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Contraseña"
@@ -56,13 +56,40 @@
                 android:paddingHorizontal="16dp"
                 android:textColor="@color/text_main"
                 android:textColorHint="@color/text_hint"
+                android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/etConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Confirmar contraseña"
+                android:inputType="textPassword"
+                android:background="@drawable/edittext_border"
+                android:paddingHorizontal="16dp"
+                android:textColor="@color/text_main"
+                android:textColorHint="@color/text_hint"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seleccionar Rol:"
+                android:textColor="@color/text_main"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <Spinner
+                android:id="@+id/spinnerRoles"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_background"
                 android:layout_marginBottom="24dp" />
 
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnCrearUsuarioFinal"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="INICIAR SESIÓN"
+                android:text="REGISTRAR USUARIO"
                 android:backgroundTint="@color/primary_soft"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -70,23 +97,13 @@
                 app:cornerRadius="8dp" />
 
             <Button
-                android:id="@+id/btnRegister"
+                android:id="@+id/btnVolver"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="REGISTRARSE"
+                android:text="VOLVER"
                 android:textColor="@color/primary_soft"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/primary_soft"
-                app:cornerRadius="8dp"
-                android:layout_marginBottom="12dp" />
-
-            <Button
-                android:id="@+id/btnResetPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="¿Olvidaste tu contraseña?"
-                android:textColor="@color/text_hint"
-                style="@style/Widget.MaterialComponents.Button.TextButton" />
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                app:cornerRadius="8dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
